@@ -1,40 +1,82 @@
- //Desenvolvido e Testado por Ronald Rafael 10/10/2025 //
-// adicionado a peça cavalo
-
 #include <stdio.h>
-#include <stdlib.h>
 
-int main() {
-    int x1, y1, x2, y2, opcao;
-    int movimentoCompleto = 1;
+// Função recursiva para mover a Torre (vertical)
+void moverTorre(int casas) {
+    if (casas == 0) return;
+    printf("Baixo\n");
+    moverTorre(casas - 1);
+}
 
-    // DO WHILE: garante escolha válida de peça
-    do {
-        printf("Escolha a peça:\n 1 - Rainha\n 2 - Bispo\n 3 - Torre\n 4 - Cavalo\n");
-        scanf("%d", &opcao);
-    } while (opcao < 1 || opcao > 4);
+// Função recursiva para mover a Rainha (horizontal)
+void moverRainha(int casas) {
+    if (casas == 0) return;
+    printf("Esquerda\n");
+    moverRainha(casas - 1);
+}
 
-    // WHILE: executa o movimento da peça
-    while (movimentoCompleto--) {
-        if (opcao == 1) { // Rainha: 8 casas para a esquerda
-            for (int i = 0; i < 8; i++) {
-                printf("Esquerda\n");
-            }
-        } else if (opcao == 2) { // Bispo: 5 casas na diagonal superior direita
-            for (int i = 0; i < 5; i++) {
-                printf("Diagonal superior direita\n");
-            }
-        } else if (opcao == 3) { // Torre: 6 casas para baixo
-            for (int i = 0; i < 6; i++) {
-                printf("Baixo\n");
-            }
-        } else if (opcao == 4) { // Cavalo: movimento em L (2 cima, 1 direita)
-            for (int i = 0; i < 2; i++) {
-                printf("Cima\n");
-            }
+// Função recursiva para mover o Bispo (diagonal)
+void moverBispoRecursivo(int casas) {
+    if (casas == 0) return;
+    printf("Diagonal superior direita\n");
+    moverBispoRecursivo(casas - 1);
+}
+
+// Função com loops aninhados para o Bispo (vertical + horizontal)
+void moverBispoComLoops(int linhas, int colunas) {
+    for (int i = 0; i < linhas; i++) {
+        printf("Cima\n");
+        for (int j = 0; j < colunas; j++) {
             printf("Direita\n");
         }
     }
+}
+
+// Função com loops complexos para o Cavalo (movimento em L)
+void moverCavalo() {
+    int movimentos = 0;
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            if (i == 2 && j == 1) {
+                printf("Cima\n");
+                printf("Cima\n");
+                printf("Direita\n");
+                movimentos++;
+                break;
+            } else {
+                continue;
+            }
+        }
+        if (movimentos > 0) break;
+    }
+}
+
+int main() {
+    // Número de casas para cada peça
+    int casasTorre = 6;
+    int casasRainha = 8;
+    int casasBispo = 5;
+    int linhasBispo = 2;
+    int colunasBispo = 3;
+
+    printf("Movimento da Torre:\n");
+    moverTorre(casasTorre);
+    printf("\n");
+
+    printf("Movimento da Rainha:\n");
+    moverRainha(casasRainha);
+    printf("\n");
+
+    printf("Movimento do Bispo (recursivo):\n");
+    moverBispoRecursivo(casasBispo);
+    printf("\n");
+
+    printf("Movimento do Bispo (loops aninhados):\n");
+    moverBispoComLoops(linhasBispo, colunasBispo);
+    printf("\n");
+
+    printf("Movimento do Cavalo:\n");
+    moverCavalo();
+    printf("\n");
 
     return 0;
 }
