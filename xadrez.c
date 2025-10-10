@@ -1,4 +1,5 @@
- //Desenvolvido e Testado por Ronald Rafael//
+ //Desenvolvido e Testado por Ronald Rafael 10/10/2025 //
+// adicionado a peça cavalo
 
 #include <stdio.h>
 #include <stdlib.h>
